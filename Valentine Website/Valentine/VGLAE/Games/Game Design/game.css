@@ -1,0 +1,231 @@
+.hiding-spots-container { 
+    display: grid; 
+    grid-template-columns: repeat(4, 1fr); 
+    grid-auto-rows: auto; 
+    gap: 2rem; 
+    max-width: 800px; 
+    padding: 20px; 
+    place-items: center; 
+    z-index: 15; 
+    perspective: 1000px; 
+} 
+
+.hiding-spot { 
+    width: 100%; 
+    height: 80px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 3rem; 
+    font-weight: 800; 
+    letter-spacing: 1px; 
+    color: #fff; 
+    background: linear-gradient(145deg, #ff4e50, #f9d423); 
+    border-radius: 20px; 
+    cursor: pointer; 
+    user-select: none; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25), inset 0 4px 8px rgba(255,255,255,0.3); 
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease; 
+    animation: spawn 0.5s ease forwards; /* initial spawn */
+    animation-fill-mode: forwards;
+} 
+
+.hiding-spot:active { 
+    transform: scale(0.92); 
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3), inset 0 3px 6px rgba(0,0,0,0.25); 
+} 
+
+.hiding-spot.shaking { 
+    background: linear-gradient(145deg, #555, #222); 
+    color: #bbb; 
+    filter: grayscale(1); 
+    animation: shake 0.45s cubic-bezier(.36,.07,.19,.97), fadeWrong 0.45s ease forwards;
+    animation-fill-mode: forwards;
+} 
+
+@keyframes shake { 
+    10%, 90% {transform: translate3d(-1px, 0, 0);} 
+    20%, 80% {transform: translate3d(2px, 0, 0);} 
+    30%, 50%, 70% {transform: translate3d(-4px, 0, 0);} 
+    40%, 60% {transform: translate3d(4px, 0, 0);} 
+} 
+
+@keyframes fadeWrong { 
+    to { 
+        opacity: 0.4; 
+        transform: scale(0.9); 
+    } 
+} 
+
+.hiding-spot.revealed { 
+    background: linear-gradient(145deg, #ff5fd8, #ff2e93); 
+    box-shadow: 0 0 30px rgba(255,80,160,0.9), inset 0 0 12px rgba(255,255,255,0.6); 
+    animation: winPop 0.6s cubic-bezier(.34,1.56,.64,1) forwards;
+    animation-fill-mode: forwards;
+} 
+
+@keyframes winPop { 
+    0% { transform: scale(1); opacity: 1; } 
+    50% { transform: scale(1.4) rotate(6deg); } 
+    100% { transform: scale(0); opacity: 0; } 
+} 
+
+.hidden-heart-popup { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%) scale(0); 
+    font-size: 2rem; 
+    color: #ff0000; 
+    pointer-events: none; 
+    z-index: 20; 
+} 
+
+.pop-anim { 
+    animation: popHeart 1s ease forwards; 
+    animation-fill-mode: forwards;
+} 
+
+@keyframes popHeart { 
+    0% {transform: translate(-50%, -50%) scale(0); opacity: 0;} 
+    50% {transform: translate(-50%, -150%) scale(2); opacity: 1;} 
+    100% {transform: translate(-50%, -300%) scale(0); opacity: 0;} 
+} 
+
+@keyframes spawn { 
+    0% { opacity: 0; transform: scale(0.5) translateY(30px); } 
+    80% { transform: scale(1.05); } 
+    100% { opacity: 1; transform: scale(1); } 
+} 
+
+.hiding-spot:nth-child(1) { animation-delay: 0.05s; } 
+.hiding-spot:nth-child(2) { animation-delay: 0.1s; } 
+.hiding-spot:nth-child(3) { animation-delay: 0.15s; } 
+.hiding-spot:nth-child(4) { animation-delay: 0.2s; } 
+.hiding-spot:nth-child(5) { animation-delay: 0.25s; } 
+.hiding-spot:nth-child(6) { animation-delay: 0.3s; } 
+.hiding-spot:nth-child(7) { animation-delay: 0.35s; } 
+.hiding-spot:nth-child(8) { animation-delay: 0.4s; } 
+.hiding-spot:nth-child(9) { animation-delay: 0.45s; } 
+.hiding-spot:nth-child(10){ animation-delay: 0.5s; } 
+.hiding-spot:nth-child(11){ animation-delay: 0.55s; } 
+.hiding-spot:nth-child(12){ animation-delay: 0.6s; }                                    
+
+.hiding-spot:not(.shaking):not(.revealed) { 
+    animation: idleGlow 2.5s ease-in-out infinite; 
+} 
+
+@keyframes idleGlow { 
+    0%, 100% { box-shadow: 0 8px 20px rgba(0,0,0,0.25); } 
+    50% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.7); } 
+} 
+
+
+#game-stage { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 100vh; 
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); 
+    padding: 20px; 
+    z-index: 10; 
+} 
+
+@media (max-width: 480px) { 
+    .hiding-spots-container { grid-template-columns: repeat(3, 1fr); } 
+    .hiding-spot { max-width: 90px; } 
+} 
+
+.instructions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 10px;
+
+    /* Fade in + slight slide from top */
+    animation: slideFadeIn 1s ease-out forwards;
+    opacity: 0;
+}
+
+.instructions h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: #ff4e50;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+
+    /* Bounce effect */
+    animation: bounceIn 1s ease forwards;
+}
+
+.instructions p {
+    font-size: 1.1rem;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 15px;
+
+    /* Slight fade in with delay */
+    animation: fadeUp 1s ease forwards;
+    animation-delay: 0.3s;
+    opacity: 0;
+}
+
+.score-board {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #ff2e93;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+
+    /* Pop effect */
+    animation: popIn 0.8s ease forwards;
+    animation-delay: 0.5s;
+    transform: scale(0);
+}
+
+/* Animations */
+@keyframes slideFadeIn {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+    0% { transform: scale(0); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.whole {
+     display: none; 
+}
+
+/* Target iPhone 6.5-inch / large mobile (~414px width) */
+@media (max-width: 430px) {
+    .hiding-spots-container {
+        grid-template-columns: repeat(3, 1fr); /* 2 items per row for big phones */
+        gap: 1rem;
+        padding: 15px;
+    }
+
+    .hiding-spot {
+        font-size: 2.2rem;  /* smaller numbers */
+        max-width: 80px;     /* fit screen nicely */
+        aspect-ratio: 5 / 4; /* maintain shape */
+    }
+} 

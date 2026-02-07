@@ -1,0 +1,208 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+section {
+    padding: 0 19%;
+}
+
+/* HERO SECTION */
+.hero {
+    min-height: 100vh;
+    width: 100%;
+    background: linear-gradient(
+        245.59deg,
+        #4d9559 0%,
+        #38703d 28.5%,
+        #133917 56.25%,
+        #1f3f1f 75.52%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate; /* IMPORTANT */
+}
+
+/* HEART BACKGROUND */
+.heart-bg {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    width: 320px;
+    height: 320px;
+    background: rgb(53, 137, 74);
+    transform: translate(-50%, -50%) rotate(45deg);
+    z-index: 1;
+    animation: pulse 4s ease-in-out infinite;
+}
+
+/* HEART SHAPE */
+.heart-bg::before,
+.heart-bg::after {
+    content: "";
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    background: rgb(53, 137, 74);
+    border-radius: 50%;
+}
+
+.heart-bg::before {
+    top: -160px;
+    left: 0;
+}
+
+.heart-bg::after {
+    left: -160px;
+    top: 0;
+}
+
+/* HERO CONTENT */
+.heroes {
+    position: relative;
+    z-index: 2;
+}
+
+/* TEXT */
+.heroes h5 {
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.heroes h4 {
+    color: #fff;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.heroes h1 {
+    font-family: 'Permanent Marker', cursive;
+    font-size: 90px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.heroes p {
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+}
+
+/* BUTTONS */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.hero-buttons a {
+    padding: 12px 28px;
+    border: 2px solid #fff;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.3s ease;
+    background-color: #7daf82;
+}
+
+.hero-buttons a:hover {
+    background: #fff;
+    color: #133917;
+    transform: translateY(-4px);
+}
+
+/* HEART ANIMATION */
+@keyframes pulse {
+    0%, 100% {
+        transform: translate(-50%, -50%) rotate(45deg) scale(1);
+    }
+    50% {
+        transform: translate(-50%, -50%) rotate(45deg) scale(1.08);
+    }
+}
+
+@media screen and (max-width: 430px) {
+
+    /* GLOBAL */
+    section {
+        padding: 0 6%;
+    }
+
+    /* HERO */
+    .hero {
+        min-height: 100svh;
+        padding: 30px 0;
+        text-align: center;
+    }
+
+    /* HEART */
+    .heart-bg {
+        width: 200px;
+        height: 200px;
+        top: 50%;
+    }
+
+    .heart-bg::before,
+    .heart-bg::after {
+        width: 200px;
+        height: 200px;
+    }
+
+    .heart-bg::before {
+        top: -100px;
+    }
+
+    .heart-bg::after {
+        left: -100px;
+    }
+
+    /* TEXT */
+    .heroes h5 {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    .heroes h4 {
+        font-size: 18px;
+        margin-bottom: 6px;
+    }
+
+    .heroes h1 {
+        font-size: 38px;
+        line-height: 1.1;
+        margin-bottom: 29px;
+    }
+
+    .heroes p {
+        font-size: 13px;
+        line-height: 1.5;
+        margin-bottom: 30px;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* BUTTONS */
+    .hero-buttons {
+        align-items: center;
+        gap: 12px;
+    }
+
+    .hero-buttons a {
+        width: 90%;
+        max-width: 220px;
+        padding: 13px 0;
+        font-size: 14px;
+    }
+}
