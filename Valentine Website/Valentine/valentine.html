@@ -88,6 +88,20 @@ body {
     animation: pop 0.5s forwards; 
 }
 
+.poetry-container a#back {
+    background: transparent;
+    border: 3px solid #fff;
+    margin-top: 40px;
+    font-size: 18px;
+}   
+
+.poetry-container a#back:hover {
+    background: #ff6a88;
+    color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+}
+
 /* POPUP KEYFRAMES */
 @keyframes pop {
     to {
@@ -123,7 +137,7 @@ body {
     <a href="VGLAE/Letters/letter3.html">Letter 3</a>
     <a href="VGLAE/Letters/letter4.html">Letter 4</a>
     <a href="VGLAE/Letters/letter5.html">Letter 5</a>
-    <a href="../../main.html">Back to Home</a>
+    <a href="../../main.html" id="back">Back to Home</a>
 </div>
 
 <script>
