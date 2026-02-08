@@ -4,121 +4,118 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    scrollbar-width: none;
+}
+
+/* BODY */
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* prevent scroll */
 }
 
 body {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-    overflow: hidden;
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7) no-repeat center center fixed; /* static background */
+    background-size: cover; /* cover entire viewport */
     position: relative;
-}
-
-/* HEARTS ANIMATION IN BACKGROUND */
-@keyframes floatUp {
-    0% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-    50% { transform: translateY(-50px) rotate(45deg); opacity: 1; }
-    100% { transform: translateY(-200px) rotate(90deg); opacity: 0; }
 }
 
 .heart-bg {
-    position: absolute;
-    font-size: 24px;
-    color: rgba(255,0,50,0.4);
-    animation: floatUp 5s infinite;
+    position: absolute; /* absolute relative to body */
+    bottom: -50px;       /* start slightly below viewport */
+    color: rgba(255,0,50,0.3);
     user-select: none;
+    pointer-events: none;
+    font-size: 16px;
+    animation-name: floatUp;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
 }
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    30% {
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-120vh) rotate(360deg); /* float fully to top */
+        opacity: 0;
+    }
+}
+
 
 /* CONTAINER */
 .container {
-    width: 320px;
-    padding: 25px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    width: 280px;
+    padding: 20px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     text-align: center;
-    animation: fadeIn 1s ease-out;
-    position: relative;
+    animation: fadeIn 0.8s ease-out;
     z-index: 1;
 }
 
-/* INTRO FADE IN */
+/* FADE IN */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-50px); }
+    from { opacity: 0; transform: translateY(-30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 /* TITLE */
 .container h2 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #c2185b;
-    margin-bottom: 20px;
-    animation: titleBounce 1s ease-out;
-}
-
-@keyframes titleBounce {
-    0% { transform: scale(0.5); opacity: 0; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1); }
+    margin-bottom: 15px;
 }
 
 /* DISPLAY */
 .input-display {
-    font-size: 32px;
-    letter-spacing: 8px;
-    margin-bottom: 20px;
+    font-size: 28px;
+    letter-spacing: 6px;
+    margin-bottom: 15px;
     color: #d81b60;
     background: #ffe6f0;
-    padding: 15px;
-    border-radius: 15px;
-    box-shadow: inset 0 4px 10px rgba(0,0,0,0.1);
-    animation: popIn 0.8s ease-out;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: inset 0 3px 8px rgba(0,0,0,0.1);
 }
 
-/* POP IN ANIMATION */
-@keyframes popIn {
-    0% { transform: scale(0.5); opacity: 0; }
-    60% { transform: scale(1.1); opacity: 1; }
-    100% { transform: scale(1); }
-}
-
-/* KEYPAD GRID */
+/* KEYPAD */
 .keypad {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 10px;
 }
 
-/* KEYPAD BUTTONS */
 .keypad button {
-    padding: 18px;
-    font-size: 24px;
+    padding: 14px;
+    font-size: 22px;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     cursor: pointer;
     background: linear-gradient(145deg, #ff6f91, #ff3f7f);
     color: #fff;
-    box-shadow: 0 6px #c2185b;
-    transition: all 0.2s ease;
-    position: relative;
-    overflow: hidden;
+    box-shadow: 0 5px #c2185b;
+    transition: 0.2s;
 }
 
-/* HOVER EFFECT */
 .keypad button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 9px #c2185b;
+    transform: translateY(-2px);
+    box-shadow: 0 7px #c2185b;
 }
 
-/* ACTIVE PRESS */
 .keypad button:active {
     transform: translateY(2px);
     box-shadow: 0 3px #c2185b;
 }
 
-/* X BUTTON STYLING */
 .keypad button:last-child {
     background: linear-gradient(145deg, #ff1744, #d50000);
     font-weight: bold;
@@ -126,16 +123,8 @@ body {
 
 /* RESPONSIVE */
 @media (max-width: 430px) {
-    .container {
-        width: 90%;
-        padding: 20px;
-    }
-    .input-display {
-        font-size: 26px;
-        letter-spacing: 6px;
-    }
-    .keypad button {
-        padding: 14px;
-        font-size: 20px;
-    }
+    .container { width: 90%; padding: 15px; }
+    .input-display { font-size: 24px; letter-spacing: 5px; }
+    .keypad button { padding: 12px; font-size: 18px; }
 }
+

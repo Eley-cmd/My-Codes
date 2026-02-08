@@ -1,4 +1,4 @@
- const correctPassword = "05142007";
+const correctPassword = "14052007";
 const display = document.getElementById("inputDisplay");
 let input = "";
 
@@ -37,13 +37,23 @@ function updateDisplay() {
 // Initialize display
 updateDisplay();
 
-// Add floating hearts dynamically
-for (let i = 0; i < 15; i++) {
-    let heart = document.createElement("div");
+const heartCount = 25;
+
+for (let i = 0; i < heartCount; i++) {
+    const heart = document.createElement("div");
     heart.classList.add("heart-bg");
     heart.textContent = "❤";
-    heart.style.left = Math.random() * 100 + "%";
-    heart.style.fontSize = Math.random() * 24 + 16 + "px";
-    heart.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+    // Random horizontal position across the viewport
+    heart.style.left = Math.random() * 100 + "vw";
+
+    // Random size for overlap effect
+    heart.style.fontSize = (12 + Math.random() * 24) + "px";
+
+    // Random animation duration and delay for natural effect
+    heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+    heart.style.animationDelay = Math.random() * 5 + "s";
+
     document.body.appendChild(heart);
 }
+
