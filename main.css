@@ -1,3 +1,4 @@
+/* ---------------- GLOBAL ---------------- */
 * {
     padding: 0;
     margin: 0;
@@ -8,201 +9,248 @@
 }
 
 section {
-    padding: 0 19%;
+    padding: 0 2%;
 }
 
-/* HERO SECTION */
+/* ================= HERO SECTION ================= */
 .hero {
     min-height: 100vh;
     width: 100%;
     background: linear-gradient(
         245.59deg,
-        #4d9559 0%,
-        #38703d 28.5%,
-        #133917 56.25%,
-        #1f3f1f 75.52%
+        #954d7c 0%,
+        #703848 28.5%,
+        #391330 56.25%,
+        #3f1f2b 75.52%
     );
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     position: relative;
     overflow: hidden;
-    isolation: isolate; /* IMPORTANT */
+    isolation: isolate;
 }
 
-/* HEART BACKGROUND */
+/* ================= HEART BACKGROUND ================= */
 .heart-bg {
     position: absolute;
     top: 45%;
     left: 50%;
     width: 320px;
     height: 320px;
-    background: rgb(53, 137, 74);
+    background: rgb(210, 30, 144);
     transform: translate(-50%, -50%) rotate(45deg);
     z-index: 1;
-    animation: pulse 4s ease-in-out infinite;
+    animation: pulse 4s ease-in-out infinite, fadeIn 1s ease forwards;
+    opacity: 0;
 }
 
-/* HEART SHAPE */
 .heart-bg::before,
 .heart-bg::after {
     content: "";
     position: absolute;
     width: 320px;
     height: 320px;
-    background: rgb(53, 137, 74);
+    background: rgb(210, 30, 144);
     border-radius: 50%;
 }
 
-.heart-bg::before {
-    top: -160px;
-    left: 0;
+.heart-bg::before { top: -160px; left: 0; }
+.heart-bg::after { left: -160px; top: 0; }
+
+@keyframes pulse {
+    0%, 100% { transform: translate(-50%, -50%) rotate(45deg) scale(1); }
+    50% { transform: translate(-50%, -50%) rotate(45deg) scale(1.08); }
 }
 
-.heart-bg::after {
-    left: -160px;
-    top: 0;
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* HERO CONTENT */
+/* ================= HERO CONTENT ================= */
 .heroes {
+    margin-top: 85px;
     position: relative;
     z-index: 2;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: heroContentIn 0.8s ease forwards;
 }
 
-/* TEXT */
-.heroes h5 {
-    color: #fff;
-    font-weight: 400;
-    margin-bottom: 20px;
+.heroes h5, .heroes h4, .heroes h1, .heroes p {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: textFadeIn 0.6s ease forwards;
 }
 
-.heroes h4 {
-    color: #fff;
-    font-weight: 600;
-    margin-bottom: 10px;
+.heroes h5 { animation-delay: 0.3s; color: #fff; font-weight: 400; margin-bottom:20px; }
+.heroes h4 { animation-delay: 0.5s; color: #fff; font-weight: 600; margin-bottom:10px; }
+.heroes h1 { animation-delay: 0.7s; font-family: 'Permanent Marker', cursive; font-size:90px; color:#fff; margin-bottom:30px; }
+.heroes p  { animation-delay: 0.9s; color: #fff; font-size:15px; line-height:1.8; margin-bottom:30px; }
+
+@keyframes heroContentIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-.heroes h1 {
-    font-family: 'Permanent Marker', cursive;
-    font-size: 90px;
-    color: #fff;
-    margin-bottom: 30px;
+@keyframes textFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-.heroes p {
-    color: #fff;
-    font-size: 15px;
-    line-height: 1.8;
-    margin-bottom: 30px;
-}
-
-/* BUTTONS */
-.hero-buttons {
+/* ================= CONTENT SECTIONS ================= */
+.content-row {
     display: flex;
     justify-content: center;
-    gap: 20px;
-
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: nowrap; /* always 1 row */
+    overflow-x: hidden;
+    height: 300px;
 }
 
-.hero-buttons a {
-    padding: 12px 28px;
-    border: 2px solid #fff;
-    border-radius: 30px;
+.content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 20px;
+    border-radius: 20px;
+
+    flex: 1 1 0;   /* grow/shrink equally */
+    max-width: 230px;  /* prevents getting too big */
+    min-width: 200px;  /* prevents getting too small */
+
+    height: 180px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: contentIn 0.8s ease forwards;
+    border: 2.5px white solid;
+}
+
+.content:hover {
+    background: rgb(255, 81, 200);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+    animation: contentIn 0.8s ease forwards; /* re-trigger animation on hover */
+}
+
+@keyframes contentIn {
+    0% { opacity: 0; top: 0; }
+    100% { opacity: 1; top: 10px; }
+}
+
+/* Sequential delays for animations */
+.content.game   { animation-delay: 1.2s; }
+.content.poetry { animation-delay: 1.6s; }
+.content.music  { animation-delay: 2s; }
+
+@keyframes contentIn {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Text and button spacing */
+.content h1 { 
+    margin-bottom: 10px; 
+    font-size: 15px; 
     color: #fff;
-    font-weight: 600;
-    transition: 0.3s ease;
-    background-color: #7daf82;
 }
 
-.hero-buttons a:hover {
-    background: #fff;
-    color: #133917;
-    transform: translateY(-4px);
+.content p  { 
+    margin-bottom: 15px; 
+    font-size: 12px; 
+    color: #e8e8e8;
 }
 
-/* HEART ANIMATION */
-@keyframes pulse {
-    0%, 100% {
-        transform: translate(-50%, -50%) rotate(45deg) scale(1);
-    }
-    50% {
-        transform: translate(-50%, -50%) rotate(45deg) scale(1.08);
-    }
+/* Buttons */
+.content a {
+    display: block;
+    margin: 10px auto 0;
+    padding: 12px 20px;
+    border-radius: 30px;
+    background: #ff4d88;
+    color: white;
+    font-weight: bold;
+    width: 80%;
+    transition: 0.3s;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: buttonPop 0.5s ease forwards;
 }
 
+.content.game a   { animation-delay: 1.4s; }
+.content.poetry a { animation-delay: 1.8s; }
+.content.music a  { animation-delay: 2.2s; }
+
+.content a:hover {
+    background: #ff1f6b;
+    transform: scale(1.07);
+    box-shadow: 0 10px 25px rgba(230, 57, 70, 0.4);
+}
+
+@keyframes buttonPop {
+    0%   { opacity:0; transform: scale(0.8); }
+    60%  { opacity:1; transform: scale(1.1); }
+    100% { opacity:1; transform: scale(1); }
+}
+
+/* ================= RESPONSIVE ================= */
 @media screen and (max-width: 430px) {
-
-    /* GLOBAL */
-    section {
-        padding: 0 6%;
-    }
-
-    /* HERO */
-    .hero {
-        min-height: 100svh;
-        padding: 30px 0;
-        text-align: center;
-    }
-
-    /* HEART */
     .heart-bg {
-        width: 200px;
-        height: 200px;
-        top: 50%;
+        width: 190px;
+        height: 190px;
     }
-
     .heart-bg::before,
     .heart-bg::after {
-        width: 200px;
-        height: 200px;
+        width: 190px;
+        height: 190px;
     }
 
-    .heart-bg::before {
-        top: -100px;
+    .heroes h5 { 
+        font-weight: 400; 
+        margin-bottom: 10px; 
     }
 
-    .heart-bg::after {
-        left: -100px;
+    .heroes h4 { 
+        font-weight: 600; 
+        margin-bottom: 5px; 
     }
 
-    /* TEXT */
-    .heroes h5 {
-        font-size: 15px;
-        margin-bottom: 8px;
+    .heroes h1 { 
+        animation-delay: 0.7s; 
+        font-family: 'Permanent Marker', cursive; 
+        font-size: 60px;
+        margin-bottom: 15px; 
     }
 
-    .heroes h4 {
-        font-size: 18px;
-        margin-bottom: 6px;
+    .heroes p  { 
+        font-size:10px; 
+        line-height:1.8; 
+        margin-bottom:15px;
+     }
+
+    .heart-bg::before { top: -95px; left: 0; }
+    .heart-bg::after { left: -95px; top: 0; }
+
+    .content-row {
+        gap: 8px;
+        overflow-x: hidden; /* fit all cards in 1 row */
     }
 
-    .heroes h1 {
-        font-size: 38px;
-        line-height: 1.1;
-        margin-bottom: 29px;
+    .content {
+        flex: 1 1 0;
+        min-width: 100px;    /* small enough to fit 3 cards */
+        max-width: 33.33%;   /* 3 cards share full width */
+        height: 180px;
+        padding: 15px;
     }
 
-    .heroes p {
-        font-size: 13px;
-        line-height: 1.5;
-        margin-bottom: 30px;
-        max-width: 320px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* BUTTONS */
-    .hero-buttons {
-        align-items: center;
-        gap: 12px;
-    }
-
-    .hero-buttons a {
-        width: 90%;
-        max-width: 220px;
-        padding: 13px 0;
-        font-size: 14px;
-    }
+    .content h1 { font-size: 15px; }
+    .content p  { font-size: 10px; }
+    .content a  { font-size: 12px; padding: 8px; }
 }
