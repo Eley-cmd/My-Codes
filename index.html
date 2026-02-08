@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entry Game</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <title>FLOR AMARILLA :)</title>
+    <link rel="stylesheet" href="index.css">
+  </head>
+  <body>
+    <div class="container">
+      <h2>
+        🔒<br />
+        Enter the password to unlock the surprise!
+      </h2>
+      <div class="input-display" id="inputDisplay">••••••••</div>
+      <div class="keypad">
+        <button class="key" onclick="enterDigit('1')">1</button>
+        <button class="key" onclick="enterDigit('2')">2</button>
+        <button class="key" onclick="enterDigit('3')">3</button>
+        <button class="key" onclick="enterDigit('4')">4</button>
+        <button class="key" onclick="enterDigit('5')">5</button>
+        <button class="key" onclick="enterDigit('6')">6</button>
+        <button class="key" onclick="enterDigit('7')">7</button>
+        <button class="key" onclick="enterDigit('9')">9</button>
+        <button class="key" onclick="enterDigit('8')">8</button>
+        <button class="key" onclick="enterDigit('0')">0</button>
+        <button class="key" onclick="clearInput()">X</button>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
 </html>

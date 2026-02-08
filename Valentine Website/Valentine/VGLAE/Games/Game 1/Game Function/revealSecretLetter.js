@@ -11,40 +11,42 @@ function revealEnvelope() {
     }, 300);
 }
 
-const envelope = document.querySelector(".envelope");
 const openBtn = document.getElementById("open");
 const closeBtn = document.getElementById("close");
 const letterOverlay = document.getElementById("letterOverlay");
 const music = document.getElementById("envelope-music");
 
-let musicStarted = false;
+openBtn.addEventListener("click", () => {
+    // SHOW LETTER
+    letterOverlay.classList.add("show");
+    document.body.classList.add("no-scroll");
 
-// ENVELOPE CLICK = unlock audio
-envelope.addEventListener("click", () => {
-    if (!musicStarted) {
-        music.play()
-            .then(() => {
-                musicStarted = true;
-            })
-            .catch(err => {
-                console.log("Audio blocked:", err);
-            });
+    // PLAY MUSIC – directly triggered by button click
+    if (music) {
+        music.currentTime = 0; // restart from beginning
+        music.volume = 1;
+        music.muted = false;
+        const playPromise = music.play();
+
+        // handle autoplay block
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    console.log("Music started!");
+                })
+                .catch((error) => {
+                    console.log("Music blocked by browser:", error);
+                });
+        }
     }
 });
 
-// OPEN BUTTON = show letter (music already unlocked)
-openBtn.addEventListener("click", (e) => {
-    e.stopPropagation(); // 👈 VERY IMPORTANT
-
-    letterOverlay.classList.add("show");
-    document.body.classList.add("no-scroll");
-});
-
-// CLOSE LETTER
 closeBtn.addEventListener("click", () => {
     letterOverlay.classList.remove("show");
     document.body.classList.remove("no-scroll");
 
-    // optional
-    // music.pause();
+    // Optional: stop music when closing
+    music.pause();
 });
+
+
