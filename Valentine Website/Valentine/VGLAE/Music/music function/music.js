@@ -7,62 +7,67 @@ const songSlider = document.getElementById("slider-song");
 const playpauseButton = document.getElementById("playpause-song");
 const prevSongButton = document.getElementById("prev-song");
 const nextSongButton = document.getElementById("next-song");
+const shuffleButton = document.getElementById("shuffle-song");
+const repeatButton = document.getElementById("repeat-song");
 
 const songs = [
-    {
-        image: "./album-art1.jpg",
-        name: "After All",
-        artist: "Cher & Peter Cetera",
-        audio: "./AfterALL.mp3"
-    },
-    {
-        image: "./album-art2.jpg",
-        name: "All I Want",
-        artist: "Olivia Rodrigo",
-        audio: "./AllIWant.mp3"
-    },
-    {
-        image: "./album-art3.jpg",
-        name: "Aubrey",
-        artist: "Bread",
-        audio: "./Aubrey.mp3",
-    },
-    {
-        image: "./album-art4.jpg",
-        name: "Bato sa Buhangin",
-        artist: "Cindirella",
-        audio: "./BatoSaBuhangin.mp3",
-    },
+    { image: "./img1.jpg", name: "After All", artist: "Cher & Peter Cetera", audio: "./AfterALL.mp3" },
+    { image: "./img2.jpg", name: "All I Want", artist: "Olivia Rodrigo", audio: "./AllIWant.mp3" },
+    { image: "./img3.jpg", name: "Aubrey", artist: "Bread", audio: "./Aubrey.mp3" },
+    { image: "./img4.jpg", name: "Bato sa Buhangin", artist: "Cindirella", audio: "./BatoSaBuhangin.mp3" },
+    { image: "./img5.jpg", name: "Be With You", artist: "Elvis Presley", audio: "./BeWithYou.mp3" },
+    { image: "./img6.jpg", name: "Enough For You", artist: "Whitney Houston", audio: "./EnoughForYou.mp3" },
+    { image: "./img7.jpg", name: "Lover Girl", artist: "Peabo Bryson", audio: "./LoverGirl.mp3" },
+    { image: "./img8.jpg", name: "Maging Sino Ka Man", artist: "Rey Valera", audio: "./MagingSinoKaMan.mp3" },
+    { image: "./img9.jpg", name: "Magnolia", artist: "Jose Mari Chan & Regine Velasquez", audio: "./Magnolia.mp3" },
+    { image: "./img10.jpg", name: "Matilda", artist: "Air Supply", audio: "./Matilda.mp3" },
+    { image: "./img11.jpg", name: "Who Knows", artist: "Air Supply", audio: "./WhoKnows.mp3" }
 ];
 
 const audio = document.createElement("audio");
 let currentSongIndex = 0;
+let isShuffle = false;
+let isRepeat = false;
 
+// Initialize first song
 updateSong();
 
 prevSongButton.addEventListener("click", function() {
-    if (currentSongIndex == 0) {
-        return;
+    if (isShuffle) {
+        currentSongIndex = Math.floor(Math.random() * songs.length);
+    } else {
+        currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
     }
-    currentSongIndex--;
     updateSong();
+    audio.play(); // autoplay
 });
 
 nextSongButton.addEventListener("click", function() {
-    if (currentSongIndex == songs.length - 1) {
-        return;
+    if (isShuffle) {
+        currentSongIndex = Math.floor(Math.random() * songs.length);
+    } else {
+        currentSongIndex = (currentSongIndex + 1) % songs.length;
     }
-    currentSongIndex++;
     updateSong();
+    audio.play(); // autoplay
 });
 
 playpauseButton.addEventListener("click", function() {
     if (!audio.paused) {
         audio.pause();
-    }
-    else {
+    } else {
         audio.play();
     }
+});
+
+shuffleButton.addEventListener("click", function() {
+    isShuffle = !isShuffle;
+    shuffleButton.classList.toggle("active", isShuffle); // toggle style if desired
+});
+
+repeatButton.addEventListener("click", function() {
+    isRepeat = !isRepeat;
+    repeatButton.classList.toggle("active", isRepeat); // toggle style if desired
 });
 
 function updateSong() {
@@ -78,12 +83,23 @@ function updateSong() {
     };
 }
 
-songSlider.addEventListener("change", function() {
+// Slider change
+songSlider.addEventListener("input", function() {
     audio.currentTime = songSlider.value;
-})
+});
 
+// Update slider every second
 function moveSlider() {
     songSlider.value = audio.currentTime;
-};
+}
+setInterval(moveSlider, 500);
 
-setInterval(moveSlider, 1000);
+// Auto next song on end
+audio.addEventListener("ended", function() {
+    if (isRepeat) {
+        audio.currentTime = 0;
+        audio.play();
+    } else {
+        nextSongButton.click(); // simulate click on next
+    }
+});
