@@ -27,23 +27,34 @@
         </div>
     </div>
 
-    <div class="whole">
-        <div class="container">
-            <div class="seal_flap one"></div>
-            <div class="seal_flap two"></div>
-            <div class="envelope"></div>
-            <div class="letter">
-                <h1>How Beautiful The Night Is</h1>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque accusantium quaerat accusamus adipisci?</p>
+<div class="envelope-container">
+    <div class="envelope">
+        <div class="envelope-top"></div>
+        <div class="envelope-body"></div>
 
-            </div>
-        </div>
-        <div class="btn">
-            <button id="open">Open Letter</button>
-            <button id="close">Close Letter</button>
-        </div>
+        <div class="heart">❤</div>
 
-    
+        <!-- Buttons INSIDE envelope -->
+        <div class="envelope-buttons">
+            <button id="open">Open</button>
+            <a href="../../../../../main.html">Back</a>
+        </div>
+    </div>
+</div>
+
+<!-- LETTER OVERLAY -->
+<div class="letter-overlay" id="letterOverlay">
+    <div class="letter">
+        <button class="close-letter" id="close">✕</button>
+
+        <h1>How Beautiful The Night Is</h1>
+        <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+            Eaque accusantium quaerat accusamus adipisci?
+        </p>
+    </div>
+</div>
+
     <script src="Game Function/addScore.js"></script>
     <script src="Game Function/initializeGame.js"></script>
     <script src="Game Function/revealSecretLetter.js"></script>

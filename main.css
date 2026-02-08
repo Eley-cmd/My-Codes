@@ -136,13 +136,8 @@ section {
     background: rgb(255, 81, 200);
     box-shadow: 0 10px 25px rgba(255, 255, 255, 0.3);
     transition: all 0.3s ease;
-    animation: contentIn 0.8s ease forwards; /* re-trigger animation on hover */
 }
 
-@keyframes contentIn {
-    0% { opacity: 0; top: 0; }
-    100% { opacity: 1; top: 10px; }
-}
 
 /* Sequential delays for animations */
 .content.game   { animation-delay: 1.2s; }
@@ -200,7 +195,7 @@ section {
 }
 
 /* ================= RESPONSIVE ================= */
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 450px) {
     .heart-bg {
         width: 190px;
         height: 190px;

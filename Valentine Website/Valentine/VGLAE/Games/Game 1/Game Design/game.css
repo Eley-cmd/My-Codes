@@ -220,9 +220,6 @@
     100% { transform: scale(1); opacity: 1; }
 }
 
-.whole {
-     display: none; 
-}
 
 /* Target iPhone 6.5-inch / large mobile (~414px width) */
 @media (max-width: 430px) {
@@ -238,3 +235,205 @@
         aspect-ratio: 5 / 4; /* maintain shape */
     }
 } 
+
+/* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* PREVENT SCROLL WHEN LETTER OPEN */
+body.no-scroll {
+    overflow: hidden;
+}
+
+/* ===================== */
+/* ENVELOPE SECTION */
+/* ===================== */
+
+.envelope-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* ENVELOPE */
+.envelope {
+    position: relative;
+    width: 220px;
+    height: 150px;
+    background: #f5f5f5;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+}
+
+/* ENVELOPE BODY */
+.envelope-body {
+    position: absolute;
+    inset: 0;
+    background: #f5f5f5;
+    z-index: 1;
+}
+
+/* ENVELOPE FLAP */
+.envelope-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-bottom: 70px solid #e6e6e6;
+    z-index: 3;
+}
+
+/* HEART SEAL */
+.heart {
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    color: crimson;
+    z-index: 4;
+}
+
+/* ===================== */
+/* BUTTONS INSIDE ENVELOPE */
+/* ===================== */
+
+.envelope-buttons {
+    position: absolute;
+    bottom: 15px; /* REQUIRED */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 5;
+}
+
+.envelope-buttons button {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #d94b4b;
+    color: #fff;
+    min-width: 60px;
+}
+
+.envelope-buttons a{
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: #777;
+    min-width: 60px;
+    color: #fff;
+}
+
+.envelope-buttons button:active,
+.envelope-buttons a:active {
+    transform: scale(0.95);
+}
+
+/* ===================== */
+/* LETTER OVERLAY */
+/* ===================== */
+
+.letter-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 999;
+}
+
+.letter-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* LETTER */
+.letter {
+    position: relative;
+    background: #fff6c9; /* light yellow */
+    width: 90%;
+    max-width: 600px;
+    padding: 30px 20px;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    font-family: Georgia, serif;
+    transform: scale(0.85);
+    transition: transform 0.4s ease;
+}
+
+.letter-overlay.show .letter {
+    transform: scale(1);
+}
+
+/* CLOSE BUTTON INSIDE LETTER */
+.close-letter {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: #5a3e1b;
+}
+
+/* LETTER TEXT */
+.letter h1 {
+    margin-bottom: 15px;
+    color: #5a3e1b;
+}
+
+.letter p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a3a2a;
+}
+
+/* ===================== */
+/* MOBILE – 6.5 INCH */
+/* ===================== */
+
+@media (max-width: 430px) {
+
+    .envelope {
+        width: 190px;
+        height: 130px;
+    }
+
+    .envelope-top {
+        border-left: 95px solid transparent;
+        border-right: 95px solid transparent;
+        border-bottom: 60px solid #e6e6e6;
+    }
+
+    .envelope-buttons button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .letter h1 {
+        font-size: 1.35rem;
+    }
+
+    .letter p {
+        font-size: 0.95rem;
+    }
+}
