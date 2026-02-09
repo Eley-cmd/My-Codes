@@ -1,5 +1,5 @@
 const heartBg = document.querySelector(".heart-bg");
-const content = document.querySelector(".content");
+const content = document.querySelector(".main-content");
 const HEART_COUNT = 18;
 
 /* Red shade palette */
