@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const questionEl = document.getElementById('question');
 
   let selectedWord = '';
-  let correctLetters = [];
+  let guessedLetters = [];
   let wrongLetters = [];
   let remainingGuesses = 6;
   let gameOver = false;
@@ -25,20 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   function initGame() {
-    correctLetters = [];
+    guessedLetters = [];
     wrongLetters = [];
     remainingGuesses = 6;
     gameOver = false;
     gameMessageEl.textContent = '';
-    heartShape.setAttribute('fill', 'rgba(247,37,133,0)'); // empty heart
+    heartShape.style.fillOpacity = '1'; 
+    heartShape.classList.remove('pulse', 'pulse-infinite');
+    heartShape.style.transform = 'scale(1)';
 
+    // Pick a random word
     const randomIndex = Math.floor(Math.random() * wordsWithQuestions.length);
     const item = wordsWithQuestions[randomIndex];
     selectedWord = item.word;
     questionEl.textContent = `Question: ${item.question}`;
     remainingGuessesEl.textContent = `Remaining guesses: ${remainingGuesses}`;
 
-    // Word display
+    // Display blanks
     wordDisplay.innerHTML = '';
     for (let i = 0; i < selectedWord.length; i++) {
       const letterEl = document.createElement('div');
@@ -61,25 +64,31 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleGuess(letter) {
-    if (gameOver || wrongLetters.includes(letter) || correctLetters.includes(letter)) return;
+    if (gameOver) return;
 
     const keyEl = document.querySelector(`.keyboard-letter[data-letter="${letter}"]`);
+    if (keyEl.classList.contains('used')) return;
+
+    keyEl.classList.add('used');
 
     if (selectedWord.includes(letter)) {
-      correctLetters.push(letter);
+      if (!guessedLetters.includes(letter)) guessedLetters.push(letter);
+      keyEl.classList.add('correct');
       updateWordDisplay();
-      keyEl.classList.add('used', 'correct');
 
-      if (checkWin()) {
+      // Check win
+      if (selectedWord.split('').every(l => guessedLetters.includes(l))) {
         gameOver = true;
-        gameMessageEl.textContent = '🎉 You Won! ❤️';
-        heartShape.setAttribute('fill', '#f72585'); // full heart
+        gameMessageEl.textContent = '🎉 You Won!';
+        heartShape.style.fillOpacity = '1';  // ensure fully visible
+        startInfinitePulse(); // only pump infinitely on win
       }
+
     } else {
-      wrongLetters.push(letter);
+      if (!wrongLetters.includes(letter)) wrongLetters.push(letter);
       remainingGuesses--;
       remainingGuessesEl.textContent = `Remaining guesses: ${remainingGuesses}`;
-      keyEl.classList.add('used', 'wrong');
+      keyEl.classList.add('wrong');
 
       updateHeart();
 
@@ -93,38 +102,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateWordDisplay() {
     document.querySelectorAll('.word-letter').forEach(el => {
-      if (correctLetters.includes(el.dataset.letter)) {
+      if (guessedLetters.includes(el.dataset.letter)) {
         el.textContent = el.dataset.letter;
       }
     });
-  }
-
-  function checkWin() {
-    return selectedWord.split('').every(letter => correctLetters.includes(letter));
   }
 
   function revealWord() {
     document.querySelectorAll('.word-letter').forEach(el => {
       el.textContent = el.dataset.letter;
     });
-    heartShape.setAttribute('fill', '#f72585'); // full heart
+    heartShape.style.fillOpacity = '1';
   }
 
   function updateHeart() {
-    // Heart fills progressively with each wrong guess
-    const fillRatio = (6 - remainingGuesses) / 6;
-    heartShape.setAttribute('fill', `rgba(247,37,133,${fillRatio})`);
+    const fillRatio = remainingGuesses / 6;
+    heartShape.style.transition = 'fill-opacity 0.5s ease';
+    heartShape.style.fillOpacity = fillRatio;
   }
 
-  // Keyboard support via physical keyboard
+  function startInfinitePulse() {
+    heartShape.classList.remove('pulse');
+    void heartShape.offsetWidth; // trigger reflow
+    heartShape.classList.add('pulse-infinite');
+  }
+
   document.addEventListener('keydown', e => {
     if (/^[a-z]$/i.test(e.key)) {
       handleGuess(e.key.toUpperCase());
     }
   });
 
-  // Reset button
   resetBtn.addEventListener('click', initGame);
 
   initGame();
 });
+

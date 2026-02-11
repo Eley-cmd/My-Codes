@@ -13,7 +13,7 @@ function enterDigit(digit) {
         if (input === correctPassword) {
             window.location.href = "main.html"; 
         } else {
-            alert("❌ Wrong password! Clue it's your Birthday. Start from month to year! Follow this format: 03052007");
+            alert("❌ Wrong password! Clue it's your Birthday. Start from day to month to year! Follow this format: 03052007");
             // DON'T clear input automatically
         }
     }

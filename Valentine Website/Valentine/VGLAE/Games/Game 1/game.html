@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="Game Design/game.css">
 </head>
 <body>
+    
+    <audio id="game1Music" preload="auto">
+        <source src="../../../../PartyMusic.mp3" type="audio/mpeg">
+    </audio>
 
     <audio id="buzz" preload="auto">
         <source src="Sound/wrongSound.mp3" type="audio/mpeg">
@@ -60,9 +64,21 @@
     <audio id="envelope-music" preload="auto">
         <source src="Music In Letters/Valentine.mp3" type="audio/mpeg">
     </audio>
-
     <script src="Game Function/addScore.js"></script>
     <script src="Game Function/initializeGame.js"></script>
     <script src="Game Function/revealSecretLetter.js"></script>
+    <script>
+          const music = document.getElementById("game1Music");
+
+  const enableAudio = () => {
+    music.muted = false;
+    music.play();
+    document.removeEventListener("click", enableAudio);
+    document.removeEventListener("keydown", enableAudio);
+  };
+
+  document.addEventListener("click", enableAudio);
+  document.addEventListener("keydown", enableAudio);
+    </script>
 </body>
 </html>

@@ -8,26 +8,33 @@
 <link rel="stylesheet" href="game2.css">
 </head>
 <body>
-  <img src="../../../../Pictures/BloomingRose.jpg" alt="Roses" id="bg-img">
-  <div class="game-container">
-    <h1>❤️ Valentine Game ❤️</h1>
-    <p id="remaining-guesses">Remaining: 6</p>
-    <p id="question">Question: </p>
+<div class="game-container">
+  <h1>❤️ Quiz Game ❤️</h1>
 
-    <div class="heart-container">
-      <svg viewBox="0 0 100 100">
-        <path id="heart-shape" d="M50 85 L15 50 C0 35,25 10,50 30 C75 10,100 35,85 50 Z" fill="transparent" stroke="#f72585" stroke-width="4"/>
-      </svg>
-    </div>
+  <p id="remaining-guesses">Remaining guesses: 6</p>
+  <p id="question"></p>
 
-    <div id="word-display" class="word-display"></div>
-    <div id="keyboard" class="keyboard"></div>
-    <div id="game-message" class="game-message"></div>
-    <a href="../mainGame.html" class="reset-btn">💖 Back 💖</a>
-    <button id="reset-btn" class="reset-btn">💖 New Game 💖</button>
-
+  <div class="heart-container">
+    <svg viewBox="0 0 100 100">
+      <path
+        id="heart-shape"
+        d="M50 85 L15 50 C0 35,25 10,50 30 C75 10,100 35,85 50 Z"
+        fill="#f72585"
+        fill-opacity="1"
+        stroke="#f72585"
+        stroke-width="4"
+      />
+    </svg>
   </div>
-      <div class="hearts">
+
+  <div id="word-display" class="word-display"></div>
+  <div id="keyboard" class="keyboard"></div>
+  <div id="game-message" class="game-message"></div>
+
+  <a href="../mainGame.html" class="reset-btn">💖 Back 💖</a>
+  <button id="reset-btn" class="reset-btn">💖 New Game 💖</button>
+</div>
+    <div class="hearts">
         <div class="heart a1"></div>
         <div class="heart a2"></div>
         <div class="heart a3"></div>
@@ -39,3 +46,9 @@
 <script src="game2.js"></script>
 </body>
 </html>
+
+
+
+
+
+

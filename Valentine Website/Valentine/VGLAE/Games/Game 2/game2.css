@@ -23,21 +23,6 @@ body {
   position: relative;
 }
 
-/* Floating hearts background */
-.heart-bg {
-  position: absolute;
-  font-size: 12px;
-  color: rgba(255, 0, 50, 0.3);
-  user-select: none;
-  pointer-events: none;
-  animation: floatUp 6s linear infinite;
-}
-@keyframes floatUp {
-  0% { transform: translateY(100vh) rotate(0deg); opacity: 0.5; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-50px) rotate(360deg); opacity: 0; }
-}
-
 /* Game container */
 .game-container {
   background: rgba(255, 240, 245, 0.95);
@@ -62,25 +47,8 @@ h1 {
 /* Game status */
 #remaining-guesses, #question {
   font-size: 0.85rem;
-  color: #ff2d95;
+  color: var(--primary);
   margin: 4px 0;
-}
-
-/* Heart container (instead of hangman) */
-.heart-container {
-  margin: 8px auto;
-  width: 70px;
-  height: 70px;
-}
-.heart-container svg {
-  width: 100%;
-  height: 100%;
-}
-#heart-shape {
-  fill: transparent;
-  stroke: var(--danger);
-  stroke-width: 3;
-  transition: fill 0.4s ease;
 }
 
 /* Word display */
@@ -156,6 +124,51 @@ h1 {
 }
 .reset-btn:hover { transform: translateY(-1px); }
 
+/* Heart container (instead of hangman) */
+.heart-container {
+  margin: 8px auto;
+  width: 70px;
+  height: 70px;
+}
+.heart-container svg {
+  width: 100%;
+  height: 100%;
+}
+#heart-shape {
+  fill: #f72585;       /* pink heart */
+  fill-opacity: 1;      /* initial fully colored */
+  stroke: #f72585;
+  transform-origin: center;
+  stroke-width: 3;
+  transition: fill-opacity 0.5s ease, transform 0.2s ease;
+
+}
+
+/* Short pulse for each correct guess */
+.pulse {
+  animation: pulse 0.3s ease forwards;
+}
+
+
+/* Infinite pulse on win */
+.pulse-infinite {
+  animation: pulse-infinite 1s infinite;
+}
+
+
+/* Pulse animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+@keyframes pulse-infinite {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
 /* Responsive */
 @media(max-width: 350px){
   .word-letter { width: 22px; height: 22px; font-size: 1rem; }
@@ -164,23 +177,7 @@ h1 {
   h1 { font-size: 1.3rem; }
 }
 
-#heart-shape {
-  transition: fill 0.4s ease;
-}
-
-#bg-img{
-    position: fixed;      /* stay fixed behind content */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    /* keep aspect ratio, cover full screen */
-    z-index: -1;          /* behind everything else */
-    filter: brightness(0.6); /* mid-dark */
-
-}
-
-/* Heart container */
+/* Background hearts floating */
 .hearts {
   position: fixed;
   inset: 0;
@@ -188,14 +185,12 @@ h1 {
   z-index: -1;
 }
 
-/* Heart base */
 .heart {
   position: absolute;
   bottom: -120px;
-  --scale: 1; /* default */
+  --scale: 1;
 }
 
-/* Heart shape */
 .heart::before,
 .heart::after {
   content: "";
@@ -219,7 +214,6 @@ h1 {
   transform-origin: 100% 100%;
 }
 
-/* Individual heart sizes & positions */
 .a1 { right: 10%; --scale: 0.6; animation: slideUp 4s linear infinite, sideSway 2s ease-in-out infinite alternate; }
 .a2 { left: 25%; --scale: 0.6; animation: slideUp 5s linear infinite, sideSway 3s ease-in-out infinite alternate; }
 .a3 { left: 40%; --scale: 0.5; animation: slideUp 6s linear infinite, sideSway 4s ease-in-out infinite alternate; }
@@ -227,23 +221,27 @@ h1 {
 .a5 { left: 75%; --scale: 1.2; animation: slideUp 8s linear infinite, sideSway 3.5s ease-in-out infinite alternate; }
 .a6 { right: 90%; --scale: 1.1; animation: slideUp 9s linear infinite, sideSway 4.5s ease-in-out infinite alternate; }
 
-/* Vertical movement */
 @keyframes slideUp {
-  0% {
-    transform: translateY(0) scale(var(--scale));
-    opacity: 0;
-  }
+  0% { transform: translateY(0) scale(var(--scale)); opacity: 0; }
   10% { opacity: 1; }
   90% { opacity: 1; }
-  100% {
-    transform: translateY(-900px) scale(var(--scale));
-    opacity: 0;
-  }
+  100% { transform: translateY(-900px) scale(var(--scale)); opacity: 0; }
 }
 
-/* Horizontal sway */
 @keyframes sideSway {
   0% { margin-left: 0; }
   50% { margin-right: 60px; }
   100% { margin-left: 60px; }
+}
+
+/* Background image */
+#bg-img {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.6);
 }
