@@ -27,7 +27,7 @@ const songs = [
 const audio = document.createElement("audio");
 let currentSongIndex = 0;
 let isShuffle = false;
-let isRepeat = false;
+let repeatState = 0; // 0 = no repeat, 1 = repeat all, 2 = repeat one
 
 // Initialize first song
 updateSong();
@@ -39,7 +39,9 @@ prevSongButton.addEventListener("click", function() {
         currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
     }
     updateSong();
-    audio.play(); // autoplay
+    audio.play();
+    playpauseButton.classList.remove("fa-circle-play");
+    playpauseButton.classList.add("fa-circle-pause");
 });
 
 nextSongButton.addEventListener("click", function() {
@@ -49,25 +51,43 @@ nextSongButton.addEventListener("click", function() {
         currentSongIndex = (currentSongIndex + 1) % songs.length;
     }
     updateSong();
-    audio.play(); // autoplay
+    audio.play();
+    playpauseButton.classList.remove("fa-circle-play");
+    playpauseButton.classList.add("fa-circle-pause");
 });
 
 playpauseButton.addEventListener("click", function() {
     if (!audio.paused) {
         audio.pause();
+        playpauseButton.classList.remove("fa-circle-pause");
+        playpauseButton.classList.add("fa-circle-play");
     } else {
         audio.play();
+        playpauseButton.classList.remove("fa-circle-play");
+        playpauseButton.classList.add("fa-circle-pause");
     }
 });
 
 shuffleButton.addEventListener("click", function() {
     isShuffle = !isShuffle;
-    shuffleButton.classList.toggle("active", isShuffle); // toggle style if desired
+    shuffleButton.classList.toggle("active", isShuffle);
 });
 
 repeatButton.addEventListener("click", function() {
-    isRepeat = !isRepeat;
-    repeatButton.classList.toggle("active", isRepeat); // toggle style if desired
+    repeatState = (repeatState + 1) % 3; // cycles 0 → 1 → 2 → 0
+
+    // Remove all classes first
+    repeatButton.classList.remove("active");
+    repeatButton.classList.remove("repeat-one");
+
+    if (repeatState === 1) {
+        // Repeat all
+        repeatButton.classList.add("active");
+    } else if (repeatState === 2) {
+        // Repeat one
+        repeatButton.classList.add("active");
+        repeatButton.classList.add("repeat-one");
+    }
 });
 
 function updateSong() {
@@ -77,6 +97,7 @@ function updateSong() {
     songArtist.innerText = song.artist;
 
     audio.src = song.audio;
+
     audio.onloadedmetadata = function() {
         songSlider.value = 0;
         songSlider.max = audio.duration;
@@ -88,7 +109,7 @@ songSlider.addEventListener("input", function() {
     audio.currentTime = songSlider.value;
 });
 
-// Update slider every second
+// Update slider every 0.5 sec
 function moveSlider() {
     songSlider.value = audio.currentTime;
 }
@@ -96,10 +117,16 @@ setInterval(moveSlider, 500);
 
 // Auto next song on end
 audio.addEventListener("ended", function() {
-    if (isRepeat) {
+    if (repeatState === 2) {
+        // Repeat one
         audio.currentTime = 0;
         audio.play();
+    } else if (repeatState === 1) {
+        // Repeat all
+        nextSongButton.click();
     } else {
-        nextSongButton.click(); // simulate click on next
+        // No repeat
+        playpauseButton.classList.remove("fa-circle-pause");
+        playpauseButton.classList.add("fa-circle-play");
     }
 });

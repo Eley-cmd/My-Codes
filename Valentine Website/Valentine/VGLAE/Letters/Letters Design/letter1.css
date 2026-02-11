@@ -1,3 +1,7 @@
+body{
+     background: linear-gradient(135deg, #80d596 35%, #9bc59c 65%);
+}
+
 .whole{
     display: flex;
     flex-direction: column;
@@ -8,6 +12,7 @@
 
 /* LETTER 1 */
 .container{
+    margin-top: 150px;
     height: 200px;
     width: 300px;
     background-color: #5b8062;
@@ -138,7 +143,6 @@
     border: none;
     padding: 14px 50px;
     font-size: 17px;
-    font-weight: 600;
     border-radius: 50px;
     cursor: pointer;
     letter-spacing: 1px;
@@ -206,3 +210,7 @@
     }
 }
 
+.heart::before,
+.heart::after {
+  background: #3d9c23;
+}

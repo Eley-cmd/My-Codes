@@ -202,4 +202,13 @@ body {
     }
 }
 
+/* Repeat button shows "1" when repeating one song */
+#repeat-song.repeat-one::after {
+    content: "1";
+    font-size: 0.6em;
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    color: #fff;
+}
 

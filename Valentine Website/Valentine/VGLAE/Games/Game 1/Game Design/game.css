@@ -248,9 +248,25 @@ body.no-scroll {
     overflow: hidden;
 }
 
-/* ===================== */
-/* ENVELOPE SECTION */
-/* ===================== */
+/* ===============================
+   GLOBAL BACKGROUND IMAGE
+================================= */
+
+.background-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    filter: brightness(0.6);
+}
+
+
+/* ===============================
+   ENVELOPE CONTAINER
+================================= */
 
 .envelope-container {
     display: flex;
@@ -259,55 +275,91 @@ body.no-scroll {
     height: 100vh;
 }
 
-/* ENVELOPE */
+
+/* ===============================
+   ENVELOPE DESIGN
+================================= */
+
 .envelope {
     position: relative;
     width: 220px;
     height: 150px;
-    background: #f5f5f5;
-    border: 2px solid #ddd;
-    border-radius: 4px;
+    background: linear-gradient(135deg, #ffe5ed, #ffc2d1);
+    border-radius: 8px;
+    box-shadow: 0 15px 40px rgba(255, 105, 135, 0.4);
+    overflow: hidden;
+    transition: transform 0.3s ease;
 }
 
-/* ENVELOPE BODY */
+.envelope:hover {
+    transform: translateY(-6px);
+}
+
+
+/* Envelope Body */
 .envelope-body {
     position: absolute;
     inset: 0;
-    background: #f5f5f5;
+    background: transparent;
     z-index: 1;
 }
 
-/* ENVELOPE FLAP */
+
+/* Envelope Flap */
 .envelope-top {
     position: absolute;
-    top: 0;
+    top: -70px;
     left: 0;
     width: 0;
     height: 0;
     border-left: 110px solid transparent;
     border-right: 110px solid transparent;
-    border-bottom: 70px solid #e6e6e6;
+    border-bottom: 70px solid #ff8fad;
     z-index: 3;
+    transition: transform 0.6s ease;
+    transform-origin: bottom;
+    transform: rotateX(-180deg);
+    
 }
 
-/* HEART SEAL */
+/* Slight open animation on hover */
+.envelope:hover .envelope-top {
+    transform: rotateX(25deg);
+}
+
+
+/* ===============================
+   HEART SEAL
+================================= */
+
 .heart {
     position: absolute;
-    top: 55%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 32px;
-    color: crimson;
+    font-size: 36px;
+    color: #ff4d6d;
     z-index: 4;
+    animation: heartbeat 1.5s infinite;
+    text-shadow: 0 0 15px rgba(255, 77, 109, 0.7);
 }
 
-/* ===================== */
-/* BUTTONS INSIDE ENVELOPE */
-/* ===================== */
+@keyframes heartbeat {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    25% { transform: translate(-50%, -50%) scale(1.15); }
+    50% { transform: translate(-50%, -50%) scale(1); }
+    75% { transform: translate(-50%, -50%) scale(1.15); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+
+/* ===============================
+   ENVELOPE BUTTONS
+================================= */
 
 .envelope-buttons {
     position: absolute;
-    bottom: 15px; /* REQUIRED */
+    bottom: 15px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -319,22 +371,34 @@ body.no-scroll {
     padding: 6px 14px;
     font-size: 0.85rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 20px;
     cursor: pointer;
-    background: #d94b4b;
+    background: linear-gradient(135deg, #ff4d6d, #ff758f);
     color: #fff;
     min-width: 60px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
 }
 
-.envelope-buttons a{
+.envelope-buttons button:hover {
+    transform: translateY(-3px);
+    background: linear-gradient(135deg, #c9184a, #ff4d6d);
+}
+
+.envelope-buttons a {
     padding: 6px 14px;
     font-size: 0.85rem;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background: #777;
+    border-radius: 20px;
+    background: #6c757d;
     min-width: 60px;
     color: #fff;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s ease;
+}
+
+.envelope-buttons a:hover {
+    background: #495057;
 }
 
 .envelope-buttons button:active,
@@ -342,14 +406,16 @@ body.no-scroll {
     transform: scale(0.95);
 }
 
-/* ===================== */
-/* LETTER OVERLAY */
-/* ===================== */
+
+/* ===============================
+   LETTER OVERLAY
+================================= */
 
 .letter-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.6);
+    background: radial-gradient(circle at top, #ffccd5, #ff8fa3);
+    backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -364,52 +430,71 @@ body.no-scroll {
     pointer-events: auto;
 }
 
-/* LETTER */
+
+/* ===============================
+   LOVE LETTER PAPER
+================================= */
+
 .letter {
     position: relative;
-    background: #fff6c9; /* light yellow */
+    background: #fff0f3;
     width: 90%;
     max-width: 600px;
-    padding: 30px 20px;
-    border-radius: 10px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    padding: 35px 25px;
+    border-radius: 15px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
     text-align: center;
     font-family: Georgia, serif;
     transform: scale(0.85);
     transition: transform 0.4s ease;
+    border: 2px solid #ffccd5;
 }
 
 .letter-overlay.show .letter {
     transform: scale(1);
 }
 
-/* CLOSE BUTTON INSIDE LETTER */
+
+/* Close Button */
 .close-letter {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
+    top: 12px;
+    right: 15px;
+    background: #ff4d6d;
     border: none;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    width: 23px;
+    height: 24.5px;
+    border-radius: 50%;
     cursor: pointer;
-    color: #5a3e1b;
+    color: white;
+    transition: 0.3s ease;
 }
 
-/* LETTER TEXT */
+.close-letter:hover {
+    background: #c9184a;
+    transform: rotate(90deg);
+}
+
+
+/* Letter Text */
+
 .letter h1 {
     margin-bottom: 15px;
-    color: #5a3e1b;
+    color: #c9184a;
+    font-size: 1.6rem;
 }
 
 .letter p {
     font-size: 1rem;
     line-height: 1.6;
-    color: #4a3a2a;
+    color: #6d6875;
 }
 
-/* ===================== */
-/* MOBILE – 6.5 INCH */
-/* ===================== */
+
+/* ===============================
+   MOBILE (430px)
+================================= */
 
 @media (max-width: 430px) {
 
@@ -421,10 +506,11 @@ body.no-scroll {
     .envelope-top {
         border-left: 95px solid transparent;
         border-right: 95px solid transparent;
-        border-bottom: 60px solid #e6e6e6;
+        border-bottom: 60px solid #ff8fab;
     }
 
-    .envelope-buttons button {
+    .envelope-buttons button,
+    .envelope-buttons a {
         font-size: 0.8rem;
         padding: 6px 12px;
     }
@@ -437,16 +523,3 @@ body.no-scroll {
         font-size: 0.95rem;
     }
 }
-
-/* Make image cover the whole screen */
-.background-img {
-    position: fixed;      /* stay fixed behind content */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;    /* keep aspect ratio, cover full screen */
-    z-index: -1;          /* behind everything else */
-    filter: brightness(0.7); /* mid-dark */
-}
-
