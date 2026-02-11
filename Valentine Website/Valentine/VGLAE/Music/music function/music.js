@@ -15,12 +15,12 @@ const songs = [
     { image: "./img2.jpg", name: "All I Want", artist: "Olivia Rodrigo", audio: "./AllIWant.mp3" },
     { image: "./img3.jpg", name: "Aubrey", artist: "Bread", audio: "./Aubrey.mp3" },
     { image: "./img4.jpg", name: "Bato sa Buhangin", artist: "Cindirella", audio: "./BatoSaBuhangin.mp3" },
-    { image: "./img5.jpg", name: "Be With You", artist: "Elvis Presley", audio: "./BeWithYou.mp3" },
-    { image: "./img6.jpg", name: "Enough For You", artist: "Whitney Houston", audio: "./EnoughForYou.mp3" },
-    { image: "./img7.jpg", name: "Lover Girl", artist: "Peabo Bryson", audio: "./LoverGirl.mp3" },
+    { image: "./img5.jpg", name: "With You", artist: "Chris Brown", audio: "./BeWithYou.mp3" },
+    { image: "./img6.jpg", name: "Enough For You", artist: "Olivia Rodrigo", audio: "./EnoughForYou.mp3" },
+    { image: "./img7.jpg", name: "Lover Girl", artist: "Laufey", audio: "./LoverGirl.mp3" },
     { image: "./img8.jpg", name: "Maging Sino Ka Man", artist: "Rey Valera", audio: "./MagingSinoKaMan.mp3" },
-    { image: "./img9.jpg", name: "Magnolia", artist: "Jose Mari Chan & Regine Velasquez", audio: "./Magnolia.mp3" },
-    { image: "./img10.jpg", name: "Matilda", artist: "Air Supply", audio: "./Matilda.mp3" },
+    { image: "./img9.jpg", name: "Magnolia", artist: "Laufey", audio: "./Magnolia.mp3" },
+    { image: "./img10.jpg", name: "Matilda", artist: "Harry Styles", audio: "./Matilda.mp3" },
     { image: "./img11.jpg", name: "Who Knows", artist: "Air Supply", audio: "./WhoKnows.mp3" }
 ];
 

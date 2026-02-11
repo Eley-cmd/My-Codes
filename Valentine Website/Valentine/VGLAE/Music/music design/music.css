@@ -2,7 +2,13 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #ffc3dc;
+    background: linear-gradient(
+        245.59deg,
+        #fecced 0%,
+        #fecbd9 28.5%,
+        #f7b8e8 56.25%,
+        #fca1c2 75.52%
+    );
     color: #ffffff;
     justify-content: center;
     align-items: center;
@@ -113,3 +119,87 @@ body {
 #slider-song::-moz-range-thumb:hover {
     transform: scale(1.2);
 }
+
+.backBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 30px 0;
+    position: relative;
+}
+
+.backBtn a {
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff6b81, #ff8fa3);
+    color: #fff;
+    padding: 14px 45px;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(255, 105, 135, 0.4);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Soft glow animation */
+@keyframes glow {
+    0% { box-shadow: 0 0 10px rgba(255,105,135,0.4); }
+    50% { box-shadow: 0 0 25px rgba(255,105,135,0.8); }
+    100% { box-shadow: 0 0 10px rgba(255,105,135,0.4); }
+}
+
+.backBtn a {
+    animation: glow 2s infinite ease-in-out;
+}
+
+/* Hover effect */
+.backBtn a:hover {
+    transform: translateY(-4px) scale(1.05);
+    background: linear-gradient(135deg, #ff4d6d, #ff6b81);
+}
+
+/* Click effect */
+.backBtn a:active {
+    transform: scale(0.95);
+}
+
+/* Floating hearts effect */
+.backBtn a::before,
+.backBtn a::after {
+    content: "❤";
+    position: absolute;
+    font-size: 14px;
+    color: #fff;
+    opacity: 0;
+    animation: floatHearts 3s infinite ease-in-out;
+}
+
+.backBtn a::before {
+    left: 15px;
+    top: 50%;
+}
+
+.backBtn a::after {
+    right: 15px;
+    top: 50%;
+    animation-delay: 1.5s;
+}
+
+@keyframes floatHearts {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-20px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+}
+
+
