@@ -20,7 +20,6 @@ const songs = [
     { image: "./img7.jpg", name: "Lover Girl", artist: "Laufey", audio: "./LoverGirl.mp3" },
     { image: "./img8.jpg", name: "Maging Sino Ka Man", artist: "Rey Valera", audio: "./MagingSinoKaMan.mp3" },
     { image: "./img9.jpg", name: "Magnolia", artist: "Laufey", audio: "./Magnolia.mp3" },
-    { image: "./img10.jpg", name: "Matilda", artist: "Harry Styles", audio: "./Matilda.mp3" },
     { image: "./img11.jpg", name: "Who Knows", artist: "Air Supply", audio: "./WhoKnows.mp3" }
 ];
 

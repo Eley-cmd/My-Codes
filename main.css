@@ -42,7 +42,7 @@ section {
     height: 320px;
     background: rgb(210, 30, 144);
     transform: translate(-50%, -50%) rotate(45deg);
-    z-index: 1;
+    z-index: -10;
     animation: pulse 4s ease-in-out infinite, fadeIn 1s ease forwards;
     opacity: 0;
 }
@@ -249,3 +249,4 @@ section {
     .content p  { font-size: 10px; }
     .content a  { font-size: 12px; padding: 8px; }
 }
+

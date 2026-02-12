@@ -166,7 +166,7 @@ body {
 /* Hover effect */
 #back:hover {
     transform: translateY(-4px) scale(1.05);
-    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    background: linear-gradient(135deg, #ae274f, #cc2e63);
 }
 
 /* Click effect */
