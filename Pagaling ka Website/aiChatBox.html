@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hallu, pagaling ka ah :)</title>
+    <link rel="stylesheet" href="aiChatBox.css">
+</head>
+<body>
+
+    <!-- 
+         I hope na sana gumaling ka na. I knew you can't see this
+     comment I hide in this website, but if given a chance for you to
+     see this... Be happy no matter what happens.
+
+         Ayyyy, bakit ganito alam mo kasi, to be honest with you, even when you say 
+    you’re okay, I can’t stop imagining that you’re not… and imagining that 
+    makes my heart ache. I hope this website can ease it. I will never, 
+    ever stop praying for your safety—always remember that.
+     -->
+
+    <!-- Question 1 -->
+    <div class="box active" id="question1">
+        <h2>How are your feeling today?</h2>
+        <p>A. Still not feeling well</p>
+        <p>B. Too tired</p>
+        <p>C. Feeling better</p>
+        <input type="text" id="answer1" placeholder="Type A, B, or C">
+        <br>
+        <button onclick="submitQuestion(1)">Submit</button>
+    </div>
+    
+    <!-- Question 2 -->
+    <div class="box" id="question2">
+        <h2>How about your mood right now?</h2>
+        <p>A. Happy</p>
+        <p>B. A little down</p>
+        <p>C. Neutral</p>
+        <input type="text" id="answer2" placeholder="Type A, B, or C">
+        <br>
+        <button onclick="prevQuestion(1,2)">Back</button>
+        <button onclick="submitQuestion(2)">Submit</button>
+    </div>
+
+    <!-- Question 3 -->
+    <div class="box" id="question3">
+        <h2>Did you get enough rest today?</h2>
+        <p>A. Yup! I slept well</p>
+        <p>B. Natulog ng maaga... as in umaga talaga</p>
+        <p>C. Sinubukannn</p>
+        <input type="text" id="answer3" placeholder="Type A, B, or C">
+        <br>
+        <button onclick="prevQuestion(2,3)">Back</button>
+        <button onclick="submitQuestion(3)">Submit</button>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+  <audio id="relaxSong" src="song/closetoyou.mp3" controls style="display:none;"></audio>
+
+    <script src="aiChatBox.js"></script>
+</body>
+</html>
