@@ -1,0 +1,84 @@
+/* Global Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family:'Arial',sans-serif;
+  background:#0f2a1f;
+  color:#f0f4f1;
+  overflow:hidden;
+  position:relative;
+  height:100vh;
+}
+
+/* Sparkles */
+.container { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:1; pointer-events:none; }
+.sparkle {
+  position:absolute;
+  width:8px; height:8px;
+  background:#b8f8a3; border-radius:50%; opacity:0.8;
+  animation: float 5s linear infinite;
+}
+@keyframes float {
+  0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity:0.8; }
+  50%{ opacity:1; }
+  100% { transform: translateY(-20vh) translateX(50px) rotate(360deg); opacity:0; }
+}
+
+/* Fullscreen flex for loading and result */
+#loading, .result {
+  position:fixed;
+  top:0; left:0;
+  width:100vw; height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:500;
+}
+
+/* Progress bar */
+.progress-bar {
+  width:80%; max-width:400px;
+  height:20px; border:2px solid #b8f8a3;
+  border-radius:20px; overflow:hidden; margin-top:20px;
+}
+.progress { height:100%; width:0%; background:linear-gradient(90deg,#68f838,#3dee22); border-radius:20px; transition:width 0.3s; }
+
+/* Result */
+.result { display:none; animation: fadeIn 1.5s ease-in-out forwards; }
+.badge { margin-top:20px; font-size:clamp(3rem,10vw,5rem); animation:bounce 1s ease-in-out infinite alternate; cursor:pointer; }
+#shareBtn { margin-top:20px; padding:10px 20px; font-size:1rem; border-radius:8px; border:none; cursor:pointer; background-color:#68f838; color:#0f2a1f; transition:transform 0.2s; }
+#shareBtn:hover { transform:scale(1.1); }
+
+/* Hacker popup */
+#hackerPopup {
+  position:fixed; top:0; left:0; width:100vw; height:100vh;
+  background:rgba(15,42,31,0.95);
+  display:none; justify-content:center; align-items:center; z-index:9999;
+}
+.hackerContent {
+  background:#0f2a1f; color:#b8f8a3;
+  padding:30px 40px; border-radius:12px;
+  max-width:400px; width:90%; text-align:center;
+  box-shadow:0 0 25px #68f838;
+}
+.hackerContent p { margin:15px 0; font-size:1.1rem; word-break:break-word; text-align:center; }
+#closeHacker { margin-top:20px; padding:10px 20px; border:none; border-radius:8px; background:#68f838; color:#0f2a1f; cursor:pointer; transition:transform 0.2s; }
+#closeHacker:hover { transform:scale(1.1); }
+body.popupActive { overflow:hidden; }
+
+/* Animations */
+@keyframes fadeIn { from {opacity:0; transform:scale(0.8);} to{opacity:1; transform:scale(1);} }
+@keyframes bounce { from{transform:translateY(0);} to{transform:translateY(-15px);} }
+
+/* Responsive */
+@media(max-width:500px){
+  .progress-bar{height:16px; }
+  h1{font-size:25px; margin-bottom: 15px;}
+  h2{font-size:20px;}
+  p{font-size:13px; margin: 15px 20px;}
+  .badge{font-size:clamp(2.5rem,15vw,4rem);}
+  #shareBtn{font-size:0.9rem; padding:8px 15px;}
+  .hackerContent{padding:20px 25px;}
+}

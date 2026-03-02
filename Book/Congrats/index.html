@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ang Husay</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+<!-- Floating sparkles container -->
+<div class="container"></div>
+
+<!-- Loading Screen -->
+<div id="loading">
+  <h1>Initializing the message...</h1>
+  <div class="progress-bar">
+    <div class="progress" id="progress"></div>
+  </div>
+</div>
+
+<!-- Result Screen -->
+<div class="result" id="result">
+  <h1 id="typed"></h1>
+  <h2>Congratulations, Miss Medrano!</h2>
+  <p>For passing the exams in CFAS, EconDev, and Pathfit II. Keep up the good work!</p>
+  <div class="badge">🏆</div>
+  <button id="shareBtn">Don't Clicked</button>
+</div>
+
+<!-- Hacker Popup -->
+<div id="hackerPopup">
+  <div class="hackerContent">
+    <p id="hackMessage"></p>
+    <p id="yourMessage"></p>
+    <button id="closeHacker">Close</button>
+  </div>
+</div>
+
+<audio id="success-sound" src="success.mp3" preload="auto"></audio>
+<script src="script.js"></script>
+</body>
+</html>
